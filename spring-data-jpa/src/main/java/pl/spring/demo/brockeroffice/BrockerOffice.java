@@ -49,8 +49,8 @@ public class BrockerOffice {
 			player.printStocks();
 			System.out.println("------------------------");
 		}
-		System.out.println("Koncowa wartosc portfela oraz akcji: "+(countStocksValue(player.getStockmanager().getOwnedStocks())
-				+ player.getSmartWallet().getAvailableCashInPLN()));
+		System.out.println("Koncowa wartosc portfela oraz akcji: "+(Pretty.pretty(countStocksValue(player.getStockmanager().getOwnedStocks())
+				+ player.getSmartWallet().getAvailableCashInPLN()))+" zl");
 	}
 
 	public void initBrockerOffice() {
