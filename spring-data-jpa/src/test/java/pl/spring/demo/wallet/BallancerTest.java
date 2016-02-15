@@ -14,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "CommonServiceTest-context.xml")
+@ContextConfiguration(locations = "CommonWalletTest-context.xml")
 public class BallancerTest {
 
 	@Autowired

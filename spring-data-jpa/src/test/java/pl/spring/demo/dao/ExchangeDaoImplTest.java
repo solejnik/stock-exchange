@@ -2,30 +2,30 @@ package pl.spring.demo.dao;
 
 import static org.junit.Assert.assertNotNull;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import pl.spring.demo.entity.StockEntity;
+import pl.spring.demo.entity.ExchangeEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "CommonDaoTest-context.xml")
-public class StockDaoImplTest {
+@ContextConfiguration(locations = "CommonBrockerOfficeTest-context.xml")
+public class ExchangeDaoImplTest {
 
     @Autowired
-    private StockDao stockDao;
+    private ExchangeDao exchangeDao;
 
     @Test
     public void testShouldFindBookById() {
         // given
-        final String date = "2013-02-20";
+        final long id = 1l;
         // when
-       List<StockEntity> findStockByDate = stockDao.findStockByDate(date);
+       ExchangeEntity findOne = exchangeDao.findOne(id);
         // then
-        assertNotNull(findStockByDate);
+        assertNotNull(findOne);
     }
+
+
 }

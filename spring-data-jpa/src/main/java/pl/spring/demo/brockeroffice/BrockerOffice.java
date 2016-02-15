@@ -49,8 +49,8 @@ public class BrockerOffice {
 			player.printStocks();
 			System.out.println("------------------------");
 		}
-		System.out.println(countStocksValue(player.getStockmanager().getOwnedStocks())
-				+ player.getSmartWallet().getAvailableCashInPLN());
+		System.out.println("Koncowa wartosc portfela oraz akcji: "+(countStocksValue(player.getStockmanager().getOwnedStocks())
+				+ player.getSmartWallet().getAvailableCashInPLN()));
 	}
 
 	public void initBrockerOffice() {
@@ -162,4 +162,13 @@ public class BrockerOffice {
 			System.out.println("DailyStock[" + stock.getName() + ", price" + stock.getPrice() + "]");
 		}
 	}
+
+	public List<StockTo> getDailyStocksTable() {
+		return dailyStocksTable;
+	}
+
+	public void setDailyStocksTable(List<StockTo> dailyStocksTable) {
+		this.dailyStocksTable = dailyStocksTable;
+	}
+	
 }

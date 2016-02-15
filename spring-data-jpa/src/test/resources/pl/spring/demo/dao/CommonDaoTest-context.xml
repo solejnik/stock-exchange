@@ -6,7 +6,6 @@
 
     <import resource="../common_configuration/CommonDatabase-context.xml"/>
 
-    <bean id="bookDao" class="pl.spring.demo.dao.impl.BookDaoImpl" />
-	<bean id="libraryDao" class="pl.spring.demo.dao.impl.LibraryDaoImpl" />
 	<bean id="stockDao" class="pl.spring.demo.dao.impl.StockDaoImpl" />
+	<bean id="exchangeDao" class="pl.spring.demo.dao.impl.ExchangeDaoImpl" />
 </beans>

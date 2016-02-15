@@ -5,7 +5,4 @@ import pl.spring.demo.entity.ExchangeEntity;
 
 public class ExchangeDaoImpl extends AbstractDao<ExchangeEntity, Long> implements ExchangeDao {
 
-
-
-
 }

@@ -56,13 +56,13 @@ public class PlayerImpl1 implements Player  {
 	}
 
 	@Override
-	public void finishSell(Cash returnedCash) {
-		smartWallet.pushCashToWallet(returnedCash);
+	public void finishBuy(OwnedStock returnedStock) {
+		stockManager.addStocks(returnedStock);
 	}
 
 	@Override
-	public void finishBuy(OwnedStock returnedStock) {
-		stockManager.addStocks(returnedStock);
+	public void finishSell(Cash returnedCash) {
+		smartWallet.pushCashToWallet(returnedCash);
 	}
 
 	@Override

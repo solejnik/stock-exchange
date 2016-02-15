@@ -1,5 +1,7 @@
 package pl.spring.demo.wallet;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -9,38 +11,53 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "CommonServiceTest-context.xml")
+@ContextConfiguration(locations = "CommonWalletTest-context.xml")
 public class SmartWalletTest {
 
-	@Autowired
-	private Ballancer ballancer;
+	private SmartWallet smartWallet;
 	private List<Cash> list  ;
 	
 	@Before
 	public void setUp(){
-		list = new ArrayList<Cash>(Arrays.asList(new Cash("PLN",1000.0),new Cash("EUR",1000.0)));
+		smartWallet = new SmartWallet();
+		list = new ArrayList<Cash>(Arrays.asList(new Cash("PLN",1000.0)));
+		smartWallet.setCash(list);
 	}
 
 	@Test
-	public void testShouldBalanceCashInWalletToPln() {
+	public void testShouldPushCashToWallet() {
+		//given
+		Cash cashToPush = new Cash("PLN",500.0,true);
 		//when
-		ballancer.balanceToPLN(list);
+		smartWallet.pushCashToWallet(cashToPush);
 		//then
-		assertTrue(list.get(1).getAmount().doubleValue()==0.0);
+		assertTrue(smartWallet.getCash("PLN").getAmount().doubleValue()==1500.0);
 	}
 	
 	@Test
-	public void testShouldBalanceCashInWalletToBeEquals() {
+	public void testShouldNotPushNotSignedCashToWallet() {
+		//given
+		Cash cashToPush = new Cash("PLN",500.0);
 		//when
-		ballancer.ballanceWallet(list);
+		smartWallet.pushCashToWallet(cashToPush);
 		//then
-		double ratio = list.get(0).getAmount()/(list.get(1).getAmount()*3.9);
-		assertTrue(ratio<1.22 && ratio>0.81);
+		assertFalse(cashToPush.getSigned());
+		assertTrue(smartWallet.getCash("PLN").getAmount().doubleValue()==1000.0);
+	}
+	
+	@Test
+	public void testShouldTakeCashFromWallet() {
+		//given
+		Double amountToTake = 500.0;
+		//when
+		Cash cashTookedFromWallet = smartWallet.takeCashFromWallet(amountToTake);
+		//then
+		assertNotNull(cashTookedFromWallet);
+		assertTrue(smartWallet.getCash("PLN").getAmount().doubleValue()==500);
 	}
 
 }

@@ -1,9 +1,7 @@
 package pl.spring.demo.service;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.annotation.Resource;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,24 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import pl.spring.demo.wallet.Cash;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "CommonServiceTest-context.xml")
-public class datesTest {
+public class StockServiceTest {
 
-	@Resource(name = "initDates")
-	private List<Date> dates;
-	@Resource(name = "initCash")
-	private List<Cash> cash;
 	@Autowired
 	private StockService stockService;
-	
 
 	@Test
-	public void testShouldFindBookByCriteriaTitleAuthorLibraryName() {
-		List<Date> allDates = stockService.getAllDates();
-		System.out.println("All dates "+dates.size());
+	public void testShouldGetAvgOfStockTillDateByName() {
+
+		// given
+		final String stockname = "TPSA";
+		final String date = "2013-01-04";
+		// when
+		Double avgOfStockBetweenDates = stockService.getMinOfStockBetweenDates(stockname, date);
+		// then
+		assertNotNull(avgOfStockBetweenDates);
+		assertTrue(avgOfStockBetweenDates > 0.0);
 	}
 
 }

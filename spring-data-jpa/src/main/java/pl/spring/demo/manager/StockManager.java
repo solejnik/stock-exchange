@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import pl.spring.demo.ownedstock.OwnedStock;
-import pl.spring.demo.wallet.Cash;
 
 @Component
 @Scope("prototype")
@@ -17,8 +16,6 @@ public class StockManager {
 
 	public StockManager() {
 	}
-
-
 
 	public void addStocks(OwnedStock ownedStock) {
 		if(ownedStock!=null){
@@ -34,7 +31,7 @@ public class StockManager {
 
 	public OwnedStock removeStocks(String stockName, Integer stockAmount) {
 		OwnedStock ownedStock = getOwnedStock(stockName);
-		if (ownedStock != null && ownedStock.getAmount() > stockAmount) {
+		if (ownedStock != null && ownedStock.getAmount() >= stockAmount) {
 			ownedStock.setAmount(ownedStock.getAmount() - stockAmount);
 			return new OwnedStock(ownedStock.getName(),stockAmount,true);
 		}
@@ -58,6 +55,10 @@ public class StockManager {
 		for (OwnedStock stock : ownedStocks) {
 			System.out.println(stock);
 		}
+	}
+	
+	public void clearStocks(){
+		ownedStocks.clear();
 	}
 
 }

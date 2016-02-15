@@ -49,7 +49,11 @@ public class SmartWallet {
 	public void pushCashToWallet(Cash cashInPln){
 		if(cashInPln.getSigned()){
 			Cash currentCash = getCash("PLN");
-			currentCash.setAmount(currentCash.getAmount()+cashInPln.getAmount());
+			if(currentCash!=null){
+				currentCash.setAmount(currentCash.getAmount()+cashInPln.getAmount());
+			}else if(currentCash==null){
+				cash.add(cashInPln);
+			}
 		}
 	
 	}
@@ -67,6 +71,10 @@ public class SmartWallet {
 
 	public void setCash(List<Cash> cash) {
 		this.cash = cash;
+	}
+	
+	public void clearWallet(){
+		cash.clear();
 	}
 	
 	

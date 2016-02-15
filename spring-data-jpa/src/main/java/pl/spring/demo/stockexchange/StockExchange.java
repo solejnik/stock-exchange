@@ -26,10 +26,6 @@ public class StockExchange {
 	public List<StockTo> getStocks(){
 		return stockService.findStockByDate(datesIterator.next().toString());
 	}
-	
-//	public void initStickExchange(){
-//		datesIterator = dates.iterator();
-//	}
 
 	public List<Date> getDates() {
 		return dates;
